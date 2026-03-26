@@ -1,56 +1,63 @@
 {
-  "name": "frontend-craft",
-  "version": "1.0.0",
-  "description": "OpenClaw native plugin: frontend skills, workspace templates, design-to-code MCP hints, and safety hooks for frontend teams.",
-  "type": "module",
-  "license": "MIT",
-  "author": {
-    "name": "Bovin Phang",
-    "email": "pengbaowen@msn.com"
-  },
-  "keywords": [
-    "openclaw",
-    "openclaw-plugin",
-    "frontend",
-    "react",
-    "vue",
-    "figma",
-    "design-to-code"
-  ],
-  "files": [
-    "src",
-    "skills",
-    "commands",
-    "templates",
-    "scripts",
-    ".mcp.json",
-    "openclaw.plugin.json",
-    "README.md",
-    "README.zh-CN.md",
-    "LICENSE"
-  ],
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
-  "openclaw": {
-    "extensions": [
-      "./src/index.ts"
-    ]
-  },
-  "peerDependencies": {
-    "openclaw": ">=2026.3.22"
-  },
-  "devDependencies": {
-    "@sinclair/typebox": "^0.34.48",
-    "@types/node": "^22.19.15",
-    "openclaw": "^2026.3.24",
-    "typescript": "^5.7.3"
-  },
-  "engines": {
-    "node": ">=22"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bovinphang/frontend-craft-openclaw.git"
-  }
+    "name": "frontend-craft",
+    "version": "1.0.0",
+    "description": "OpenClaw native plugin: frontend skills, workspace templates, design-to-code MCP hints, and safety hooks for frontend teams.",
+    "type": "module",
+    "license": "MIT",
+    "author": {
+        "name": "Bovin Phang",
+        "email": "pengbaowen@msn.com"
+    },
+    "keywords": [
+        "openclaw",
+        "openclaw-plugin",
+        "frontend",
+        "react",
+        "vue",
+        "figma",
+        "design-to-code"
+    ],
+    "files": [
+        "src",
+        "skills",
+        "commands",
+        "templates",
+        "scripts",
+        ".mcp.json",
+        "openclaw.plugin.json",
+        "README.md",
+        "README.zh-CN.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "clean": "node -e \"import('node:fs/promises').then(fs => fs.rm('dist', { recursive: true, force: true }))\"",
+        "typecheck": "tsc --noEmit",
+        "build": "tsc -p tsconfig.json",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm run clean && npm run typecheck && npm run build"
+    },
+    "openclaw": {
+        "extensions": [
+            "./src/index.ts"
+        ],
+        "compat": {
+            "pluginApi": ">=2026.3.22"
+        }
+    },
+    "peerDependencies": {
+        "openclaw": ">=2026.3.22"
+    },
+    "devDependencies": {
+        "@sinclair/typebox": "^0.34.48",
+        "@types/node": "^22.19.15",
+        "openclaw": "^2026.3.24",
+        "typescript": "^5.7.3"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bovinphang/frontend-craft-openclaw.git"
+    }
 }
