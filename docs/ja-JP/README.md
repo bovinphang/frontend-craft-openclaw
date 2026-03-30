@@ -19,6 +19,22 @@
 
 ## インストール
 
+[ClawHub](https://clawhub.ai) から（推奨）:
+
+```bash
+openclaw plugins install clawhub:frontend-craft
+```
+
+バージョン固定: `clawhub:frontend-craft@<version>`。
+
+npm パッケージ名（ClawHub を優先し、なければレジストリ）:
+
+```bash
+openclaw plugins install frontend-craft
+```
+
+ローカルクローンなど:
+
 ```bash
 openclaw plugins install /path/to/frontend-craft
 openclaw gateway restart
@@ -26,6 +42,20 @@ openclaw plugins inspect frontend-craft
 ```
 
 `plugins.allow` と `plugins.entries.frontend-craft` の設定を推奨します。
+
+## 更新
+
+ClawHub / npm で入れた場合はプラグイン id で更新:
+
+```bash
+openclaw plugins update frontend-craft
+```
+
+明示 spec の例: `openclaw plugins update clawhub:frontend-craft` や `frontend-craft@latest`。全件は `openclaw plugins update --all`、確認のみは `--dry-run`。あと `openclaw gateway restart`。
+
+`-l` やローカルパスで入れた場合は、同じパスから再インストールしてください。
+
+**スキルのみ** (`npx skills add …`): 該当プロジェクト（またはグローバル）で `npx skills update`。事前に `npx skills check`。詳細は [README.md](../../README.md) の更新節を参照。
 
 ## ワークスペース初期化
 
@@ -75,4 +105,4 @@ openclaw plugins inspect frontend-craft
 npx skills add bovinphang/frontend-craft-openclaw
 ```
 
-OpenClaw プラグインのエントリや hooks は含みません。
+OpenClaw プラグインのエントリや hooks は含みません。OpenClaw では `openclaw plugins install clawhub:frontend-craft` などを使用してください。

@@ -19,6 +19,22 @@
 
 ## 安裝
 
+自 [ClawHub](https://clawhub.ai) 安裝（建議）：
+
+```bash
+openclaw plugins install clawhub:frontend-craft
+```
+
+可使用 `clawhub:frontend-craft@<版本>` 鎖定版本。
+
+以 npm 套件名安裝（OpenClaw 會先查 ClawHub，再走 registry）：
+
+```bash
+openclaw plugins install frontend-craft
+```
+
+本機克隆或壓縮包：
+
 ```bash
 openclaw plugins install /path/to/frontend-craft
 openclaw gateway restart
@@ -26,6 +42,20 @@ openclaw plugins inspect frontend-craft
 ```
 
 建議在 `openclaw.json` 設定 `plugins.allow` 與 `plugins.entries.frontend-craft`。
+
+## 更新
+
+若自 ClawHub / npm 安裝，可用插件 id 更新：
+
+```bash
+openclaw plugins update frontend-craft
+```
+
+亦可指定完整說明，例如 `openclaw plugins update clawhub:frontend-craft`、`frontend-craft@latest`。全部插件：`openclaw plugins update --all`；僅預覽：`--dry-run`。完成後執行 `openclaw gateway restart`。
+
+以 `-l` 或本機路徑安裝者，請自同一路徑重新安裝以刷新檔案。
+
+**僅技能**（`npx skills add …`）：在安裝技能的專案（或對應全域範圍）執行 `npx skills update`，可先 `npx skills check`。完整說明見倉庫根目錄 [README.md](../../README.md)。
 
 ## 工作區初始化
 
@@ -75,4 +105,4 @@ openclaw plugins inspect frontend-craft
 npx skills add bovinphang/frontend-craft-openclaw
 ```
 
-不會安裝 OpenClaw 插件執行檔與 hooks。
+不會安裝 OpenClaw 插件執行檔與 hooks；完整插件請使用 `openclaw plugins install clawhub:frontend-craft` 等方式。

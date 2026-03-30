@@ -32,18 +32,26 @@ Ships workflow **skills**, **slash-command markdown** under `commands/`, **agent
 
 ### 1. Install
 
+From [ClawHub](https://clawhub.ai) (recommended):
+
+```bash
+openclaw plugins install clawhub:frontend-craft
+```
+
+You can pin a version with `clawhub:frontend-craft@<version>`.
+
+From npm (bare package name; OpenClaw checks ClawHub first, then the registry):
+
+```bash
+openclaw plugins install frontend-craft
+```
+
 From a clone or release tarball:
 
 ```bash
 openclaw plugins install /path/to/frontend-craft
 # or linked dev install:
 openclaw plugins install -l /path/to/frontend-craft
-```
-
-From npm (after publish):
-
-```bash
-openclaw plugins install frontend-craft
 ```
 
 Enable explicitly (recommended):
@@ -75,7 +83,46 @@ Verify:
 openclaw plugins inspect frontend-craft
 ```
 
-### 2. Initialize the OpenClaw workspace (recommended)
+### 2. Update the plugin
+
+If you installed from **ClawHub** or **npm**, OpenClaw keeps a tracked install spec. Update by plugin id:
+
+```bash
+openclaw plugins update frontend-craft
+```
+
+You can also pass an explicit package spec (version, dist-tag, or `clawhub:` locator), for example:
+
+```bash
+openclaw plugins update clawhub:frontend-craft
+openclaw plugins update frontend-craft@latest
+```
+
+Update every installed plugin:
+
+```bash
+openclaw plugins update --all
+```
+
+Preview without applying:
+
+```bash
+openclaw plugins update frontend-craft --dry-run
+```
+
+Then restart the gateway: `openclaw gateway restart`.
+
+**Linked or local path installs** (`openclaw plugins install -l …` or a directory path): reinstall from that same path so files refresh, for example:
+
+```bash
+openclaw plugins install -l /path/to/frontend-craft
+```
+
+**Skills only** (via `npx skills add …`): in the project where skills were installed (or the matching global scope), run `npx skills update`. Use `npx skills check` first to see what would change.
+
+CLI reference: [OpenClaw plugins](https://docs.openclaw.ai/cli/plugins).
+
+### 3. Initialize the OpenClaw workspace (recommended)
 
 OpenClaw loads context from the **agent workspace** (often `~/.openclaw/workspace`). Use the optional tool **`frontend_craft_init_workspace`** (add it to your tool allowlist if needed) with:
 
@@ -89,7 +136,7 @@ Or copy manually from the plugin root:
 
 See [`commands/init.md`](commands/init.md) and [`templates/OPENCLAW-CONFIG.md`](templates/OPENCLAW-CONFIG.md).
 
-### 3. MCP (design tools)
+### 4. MCP (design tools)
 
 This repo’s [`.mcp.json`](.mcp.json) is a **reference** for Figma, Sketch, MasterGo, Pixso, and 墨刀. **Native OpenClaw plugins do not auto-merge** that file into your runtime — copy the `mcpServers` block into your **embedded Pi / gateway MCP config** (same structure as in `.mcp.json`).
 
@@ -190,7 +237,7 @@ To install **only** the `skills/` workflows into Cursor, Codex, Claude Code, etc
 npx skills add bovinphang/frontend-craft-openclaw
 ```
 
-This does **not** install the OpenClaw native plugin hooks or `src/index.ts`; use `openclaw plugins install` for OpenClaw.
+This does **not** install the OpenClaw native plugin hooks or `src/index.ts`; use `openclaw plugins install clawhub:frontend-craft` (or another install source from above) for OpenClaw.
 
 ---
 

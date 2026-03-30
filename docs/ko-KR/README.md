@@ -15,9 +15,25 @@
 
 이 저장소는 **OpenClaw 네이티브 플러그인**입니다(`openclaw.plugin.json`, `src/index.ts`). 프론트엔드 워크플로 스킬, `skills/agents/` 플레이북, 선택 도구 **`frontend_craft_init_workspace`**, typed hooks(위험한 `exec` 차단, 선택적 Prettier, 워크스페이스 힌트 등)를 제공합니다.
 
-**요구 사항:** Node.js ≥ 22, OpenClaw ≥ 2026.3.0.
+**요구 사항:** Node.js ≥ 22, OpenClaw ≥ 2026.3.22.
 
 ## 설치
+
+[ClawHub](https://clawhub.ai)에서 설치(권장):
+
+```bash
+openclaw plugins install clawhub:frontend-craft
+```
+
+버전 고정: `clawhub:frontend-craft@<version>`.
+
+npm 패키지 이름(ClawHub를 먼저 조회한 뒤 레지스트리):
+
+```bash
+openclaw plugins install frontend-craft
+```
+
+로컬 클론 등:
 
 ```bash
 openclaw plugins install /path/to/frontend-craft
@@ -26,6 +42,20 @@ openclaw plugins inspect frontend-craft
 ```
 
 `plugins.allow` 및 `plugins.entries.frontend-craft` 설정을 권장합니다.
+
+## 업데이트
+
+ClawHub / npm으로 설치한 경우 플러그인 id로 업데이트:
+
+```bash
+openclaw plugins update frontend-craft
+```
+
+명시 spec 예: `openclaw plugins update clawhub:frontend-craft`, `frontend-craft@latest`. 전체는 `openclaw plugins update --all`, 미리보기는 `--dry-run`. 이후 `openclaw gateway restart`.
+
+`-l` 또는 로컬 경로 설치는 동일 경로에서 다시 설치하세요.
+
+**스킬만** (`npx skills add …`): 해당 프로젝트(또는 전역)에서 `npx skills update`. 사전에 `npx skills check`. 자세한 내용은 [README.md](../../README.md) 업데이트 절을 참고하세요.
 
 ## 워크스페이스 초기화
 
@@ -75,4 +105,4 @@ openclaw plugins inspect frontend-craft
 npx skills add bovinphang/frontend-craft-openclaw
 ```
 
-OpenClaw 플러그인 엔트리와 hooks는 포함되지 않습니다.
+OpenClaw 플러그인 엔트리와 hooks는 포함되지 않습니다. OpenClaw 전체 플러그인은 `openclaw plugins install clawhub:frontend-craft` 등을 사용하세요.
