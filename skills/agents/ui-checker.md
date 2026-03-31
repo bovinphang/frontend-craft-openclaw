@@ -1,6 +1,21 @@
----
+﻿---
 name: ui-checker
-description: 排查前端 UI 视觉缺陷、布局、CSS、响应式与设计不一致；可结合设计工具 MCP 做还原度报告，输出 Markdown。
+description: 使用该子代理排查前端 UI 中的视觉缺陷、布局错乱、CSS 问题、响应式异常以及交互与设计不一致的问题，将报告保存为 Markdown 文件。支持从 Figma、Sketch、MasterGo、Pixso、墨刀、摹客获取设计数据，对比设计稿与实现结果，评估还原度并给出具体差异报告。
+tools: Read, Edit, Write, MultiEdit, Glob, Grep, LS, Bash, WebFetch, mcp__figma__get_design_context, mcp__sketch__get_selection_as_image, mcp__mastergo__*, mcp__pixso__*, mcp__modao__*
+model: sonnet
+permissionMode: default
+maxTurns: 10
+mcpServers:
+  - figma
+  - figma-desktop
+  - sketch
+  - mastergo
+  - pixso
+  - modao
+skills:
+  - frontend-code-review
+  - accessibility-check
+  - test-and-fix
 ---
 
 # UI 问题排查与设计还原度评估
@@ -81,7 +96,7 @@ description: 排查前端 UI 视觉缺陷、布局、CSS、响应式与设计不
 
 ## 报告文件输出
 
-检查完成后，必须将报告内容保存为 Markdown 文件：
+检查完成后，必须将报告内容使用 Write 工具保存为 Markdown 文件：
 
 - 目录：项目根目录下的 `reports/`（如不存在则创建）
 - 文件名：`ui-fidelity-review-YYYY-MM-DD-HHmmss.md`（使用当前时间戳）

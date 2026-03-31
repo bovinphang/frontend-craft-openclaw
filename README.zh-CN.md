@@ -208,6 +208,10 @@ frontend-craft/
 | `ui-checker`            | UI 视觉问题排查、设计还原度评估                             | `ui-fidelity-review-*.md`    |
 | `figma-implementer`     | 按 Figma/Sketch/MasterGo/Pixso/墨刀/摹客设计稿精确实现 UI | `design-implementation-*.md` |
 | `design-token-mapper`   | 将设计变量映射到项目 Design Token                       | `token-mapping-*.md`         |
+| `frontend-code-reviewer` | 前端代码评审（React/Vue/Next/Nuxt、可访问性、客户端安全）     | `code-review-*.md`           |
+| `frontend-security-reviewer` | 浏览器侧安全（XSS、密钥、危险 DOM/API）              | `security-review-*.md`       |
+| `frontend-e2e-runner`   | E2E 旅程、Playwright/Cypress、不稳定用例                | `e2e-summary-*.md`（可选）     |
+| `typescript-reviewer`   | TS/JS 类型、异步、安全；先跑 typecheck                  | `typescript-review-*.md`     |
 
 
 ### Typed hooks
@@ -248,7 +252,7 @@ npx skills add bovinphang/frontend-craft-openclaw
 
 ## 报告输出
 
-各技能/剧本中约定的 `reports/` 下 Markdown 文件。
+各技能/剧本中约定的 `reports/` 下 Markdown 文件（如 `code-review-*.md`、`security-review-*.md`、`typescript-review-*.md`、`performance-review-*.md`、`e2e-summary-*.md`、`design-implementation-*.md` 等）。
 
 ---
 

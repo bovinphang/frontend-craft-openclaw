@@ -1,6 +1,19 @@
----
+﻿---
 name: design-token-mapper
-description: 将 Figma / Sketch / MasterGo / Pixso / 墨刀 / 摹客中的样式与变量映射到项目已有 Token、主题与样式约定，并输出映射报告 Markdown。
+description: 使用该子代理将 Figma、Sketch、MasterGo、Pixso、墨刀或摹客中的样式与变量映射到项目已有的设计 Token、主题变量和样式约定，并将映射报告保存为 Markdown 文件。
+tools: Read, Edit, Write, MultiEdit, Glob, Grep, LS, mcp__figma__get_design_context, mcp__figma__get_variable_defs, mcp__sketch__get_selection_as_image, mcp__mastergo__*, mcp__pixso__*, mcp__modao__*
+model: sonnet
+permissionMode: default
+maxTurns: 8
+mcpServers:
+  - figma
+  - figma-desktop
+  - sketch
+  - mastergo
+  - pixso
+  - modao
+skills:
+  - implement-from-design
 ---
 
 你是一名设计 Token 映射专家。
@@ -55,7 +68,7 @@ description: 将 Figma / Sketch / MasterGo / Pixso / 墨刀 / 摹客中的样式
 
 ## 报告文件输出
 
-映射完成后，必须将报告内容保存为 Markdown 文件：
+映射完成后，必须将报告内容使用 Write 工具保存为 Markdown 文件：
 
 - 目录：项目根目录下的 `reports/`（如不存在则创建）
 - 文件名：`token-mapping-YYYY-MM-DD-HHmmss.md`（使用当前时间戳）

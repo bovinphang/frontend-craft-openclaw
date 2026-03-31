@@ -72,7 +72,7 @@ version: 1.0.0
 
 1. 在 `skills/agents/` 下创建 `my-agent.md`（OpenClaw 以技能形式加载，非 Claude 子代理）
 2. 使用精简 YAML frontmatter（`name`、`description`）与正文说明职责、流程与报告路径
-3. 在主 README 的 Agent playbooks 小节中补充说明
+3. 在主 README 的 Agent playbooks 表格中补充一行，并同步 **README.zh-CN.md**（及 **docs/*/README.md**，如有对应小节）
 
 ## 如何添加 Command
 

@@ -208,6 +208,10 @@ Markdown under `skills/agents/*.md` corresponds to the **sub-agent** roles in th
 | `ui-checker`            | UI defects, design fidelity vs design specs                                             | `ui-fidelity-review-*.md`    |
 | `figma-implementer`     | High-fidelity UI from Figma / Sketch / MasterGo / Pixso / 墨刀 / 摹客                   | `design-implementation-*.md` |
 | `design-token-mapper`   | Map design variables to project Design Tokens                                           | `token-mapping-*.md`         |
+| `frontend-code-reviewer` | Frontend code review (React/Vue/Next/Nuxt, a11y, client security)                    | `code-review-*.md`           |
+| `frontend-security-reviewer` | Browser-side security (XSS, secrets, dangerous DOM/API)                            | `security-review-*.md`       |
+| `frontend-e2e-runner`   | E2E journeys, Playwright/Cypress, flaky handling                                        | `e2e-summary-*.md` (optional) |
+| `typescript-reviewer`   | TS/JS types, async, security; run typecheck first                                       | `typescript-review-*.md`     |
 
 ### Typed hooks (plugin)
 
@@ -243,7 +247,7 @@ This does **not** install the OpenClaw native plugin hooks or `src/index.ts`; us
 
 ## Report output
 
-Reports are written under the project/workspace `reports/` directory as described in each skill or agent playbook (e.g. `code-review-*.md`, `design-implementation-*.md`).
+Reports are written under the project/workspace `reports/` directory as described in each skill or agent playbook (e.g. `code-review-*.md`, `security-review-*.md`, `typescript-review-*.md`, `performance-review-*.md`, `e2e-summary-*.md`, `design-implementation-*.md`).
 
 ---
 
