@@ -1,15 +1,15 @@
-import { existsSync } from "node:fs";
-import { execSync } from "node:child_process";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const FORMATTABLE = /\.(js|jsx|ts|tsx|vue|css|scss|less|json|md|html)$/;
 
-export function tryPrettierWrite(absPath: string): void {
+export async function tryPrettierWrite(absPath: string): Promise<void> {
   if (!absPath || !existsSync(absPath)) return;
   if (!FORMATTABLE.test(absPath)) return;
   try {
-    execSync(`npx prettier --write "${absPath.replace(/"/g, '\\"')}"`, {
-      stdio: "ignore",
-    });
+    const prettier = await import("prettier");
+    const input = readFileSync(absPath, "utf8");
+    const output = await prettier.format(input, { filepath: absPath });
+    writeFileSync(absPath, output);
   } catch {
     // prettier missing or failed — non-blocking
   }

@@ -1,6 +1,6 @@
 {
     "name": "frontend-craft",
-    "version": "1.0.0",
+    "version": "1.2.2",
     "description": "OpenClaw native plugin: frontend skills, workspace templates, design-to-code MCP hints, and safety hooks for frontend teams.",
     "type": "module",
     "license": "MIT",
@@ -25,10 +25,8 @@
         "node": ">=22"
     },
     "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
             "default": "./dist/index.js"
         }
     },
@@ -42,14 +40,19 @@
         "openclaw.plugin.json",
         "README.md",
         "README.zh-CN.md",
-        "LICENSE"
+        "LICENSE",
+        "!**/*.ts",
+        "!**/*.tsx",
+        "!**/*.d.ts",
+        "!**/*.map"
     ],
     "scripts": {
         "clean": "node -e \"import('node:fs/promises').then(fs => fs.rm('dist', { recursive: true, force: true }))\"",
         "typecheck": "tsc --noEmit -p tsconfig.json",
         "build": "tsc -p tsconfig.json",
+        "check:pack-artifacts": "node scripts/verify-pack-artifacts.mjs",
         "prepare": "npm run clean && npm run build",
-        "prepack": "npm run clean && npm run typecheck && npm run build",
+        "prepack": "npm run clean && npm run typecheck && npm run build && npm run check:pack-artifacts",
         "prepublishOnly": "npm run clean && npm run typecheck && npm run build"
     },
     "openclaw": {
@@ -57,19 +60,25 @@
             "./dist/index.js"
         ],
         "compat": {
-            "pluginApi": ">=2026.3.22"
+            "pluginApi": ">=2026.4.20"
         },
         "build": {
-            "openclawVersion": "2026.3.24",
-            "pluginSdkVersion": "2026.3.24"
+            "openclawVersion": "2026.4.20",
+            "pluginSdkVersion": "2026.4.20"
         }
     },
     "peerDependencies": {
-        "openclaw": ">=2026.3.22"
+        "openclaw": ">=2026.4.20"
+    },
+    "dependencies": {
+        "@sinclair/typebox": "^0.34.49"
+    },
+    "optionalDependencies": {
+        "prettier": "^3.5.0"
     },
     "devDependencies": {
         "@types/node": "^22.19.15",
-        "openclaw": "^2026.3.24",
+        "openclaw": "^2026.4.20",
         "typescript": "^5.7.3"
     },
     "publishConfig": {

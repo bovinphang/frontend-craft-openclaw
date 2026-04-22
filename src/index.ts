@@ -49,7 +49,7 @@ export default definePluginEntry({
         if (toolName !== "write" && toolName !== "edit") return;
         const params = event.params as Record<string, unknown> | undefined;
         const filePath = pathFromWriteLikeParams(toolName, params);
-        if (filePath) tryPrettierWrite(filePath);
+        if (filePath) await tryPrettierWrite(filePath);
       });
     }
 

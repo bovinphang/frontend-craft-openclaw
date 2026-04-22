@@ -1,23 +1,16 @@
-import { execSync } from "node:child_process";
-import { platform } from "node:os";
-
+/**
+ * Desktop notifications usually require spawning a shell; OpenClaw blocks that in plugin sources.
+ * Best-effort: terminal bell + stderr line (visible in gateway logs).
+ */
 export function notifyTaskComplete(title = "OpenClaw", body = "任务完成"): void {
-  const os = platform();
   try {
-    if (os === "darwin") {
-      execSync(
-        `osascript -e 'display notification "${body.replace(/'/g, "'\\''")}" with title "${title.replace(/'/g, "'\\''")}"'`,
-        { stdio: "ignore" },
-      );
-    } else if (os === "linux") {
-      execSync(`notify-send "${title}" "${body}"`, { stdio: "ignore" });
-    } else if (os === "win32") {
-      execSync(
-        `powershell -NoProfile -Command "[console]::beep(600,300); Write-Host '${body.replace(/'/g, "''")}'"`,
-        { stdio: "ignore" },
-      );
-    }
+    process.stdout.write("\x07");
   } catch {
-    // optional
+    /* optional */
+  }
+  try {
+    process.stderr.write(`[${title}] ${body}\n`);
+  } catch {
+    /* optional */
   }
 }

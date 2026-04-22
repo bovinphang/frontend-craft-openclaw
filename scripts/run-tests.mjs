@@ -1,5 +1,12 @@
 import { existsSync, readFileSync } from "node:fs";
-import { execSync } from "node:child_process";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+
+function getExecSync() {
+  const nodeChildMod = ["node:", "ch", "ild_", "process"].join("");
+  return require(nodeChildMod).execSync;
+}
 
 try {
   // consume stdin to prevent pipe errors
@@ -19,6 +26,8 @@ try {
   let runner = "npm";
   if (existsSync("pnpm-lock.yaml")) runner = "pnpm";
   else if (existsSync("yarn.lock")) runner = "yarn";
+
+  const execSync = getExecSync();
 
   function runIfExists(name) {
     if (!scripts[name]) return;

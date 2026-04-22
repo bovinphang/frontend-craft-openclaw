@@ -2,7 +2,7 @@
     "id": "frontend-craft",
     "name": "Frontend Craft",
     "description": "Frontend team skills, OpenClaw workspace templates, optional init tool, exec safety hooks, and design MCP reference.",
-    "version": "1.0.0",
+    "version": "1.2.2",
     "skills": [
         "skills",
         "commands"
@@ -14,7 +14,7 @@
             "notifyOnAgentEnd": {
                 "type": "boolean",
                 "default": false,
-                "description": "Desktop notification when an agent run completes successfully"
+                "description": "Bell + log line when an agent run completes successfully (no OS notification; avoids plugin-install security scan issues)"
             },
             "runValidationOnGatewayStop": {
                 "type": "boolean",

@@ -24,7 +24,7 @@
 
 Ships workflow **skills**, **slash-command markdown** under `commands/`, **agent-style playbooks** under `skills/agents/`, optional **`frontend_craft_init_workspace`** tool, and **typed hooks** (`before_tool_call`, `after_tool_call`, `before_prompt_build`, `agent_end`). Review and analysis outputs follow each skill’s convention (typically `reports/*.md`).
 
-**Requirements:** Node.js **≥ 22**, OpenClaw **≥ 2026.3.22**.
+**Requirements:** Node.js **≥ 22**, OpenClaw **≥ 2026.4.20**.
 
 ---
 
@@ -46,13 +46,20 @@ From npm (bare package name; OpenClaw checks ClawHub first, then the registry):
 openclaw plugins install frontend-craft
 ```
 
-From a clone or release tarball:
+From a clone or release tarball (**recommended for local installs on Windows**):
 
 ```bash
-openclaw plugins install /path/to/frontend-craft
+# Build and pack first (avoids pnpm symlink copy issues on Windows):
+npm install
+npm run build
+npm pack
+openclaw plugins install ./frontend-craft-<version>.tgz
+
 # or linked dev install:
 openclaw plugins install -l /path/to/frontend-craft
 ```
+
+If you install directly from a local directory that uses pnpm-style symlinks in `node_modules`, Windows may fail with `EPERM ... symlink ...`.
 
 Enable explicitly (recommended):
 
@@ -201,17 +208,17 @@ Workflow definitions under `skills/<name>/SKILL.md`, aligned with the [frontend-
 
 Markdown under `skills/agents/*.md` corresponds to the **sub-agent** roles in the Claude Code plugin, but in OpenClaw they are **in-session playbooks** (not separate subagent processes). Load the file in context when you need that workflow.
 
-| Playbook                | Purpose                                                                                 | Report output                |
-| ----------------------- | --------------------------------------------------------------------------------------- | ---------------------------- |
-| `frontend-architect`    | Page splitting, component architecture, state flow, directory planning, large refactors | `architecture-proposal-*.md` |
-| `performance-optimizer` | Performance bottlenecks (bundle, render, network); quantified optimization plan         | `performance-review-*.md`    |
-| `ui-checker`            | UI defects, design fidelity vs design specs                                             | `ui-fidelity-review-*.md`    |
-| `figma-implementer`     | High-fidelity UI from Figma / Sketch / MasterGo / Pixso / 墨刀 / 摹客                   | `design-implementation-*.md` |
-| `design-token-mapper`   | Map design variables to project Design Tokens                                           | `token-mapping-*.md`         |
-| `frontend-code-reviewer` | Frontend code review (React/Vue/Next/Nuxt, a11y, client security)                    | `code-review-*.md`           |
-| `frontend-security-reviewer` | Browser-side security (XSS, secrets, dangerous DOM/API)                            | `security-review-*.md`       |
-| `frontend-e2e-runner`   | E2E journeys, Playwright/Cypress, flaky handling                                        | `e2e-summary-*.md` (optional) |
-| `typescript-reviewer`   | TS/JS types, async, security; run typecheck first                                       | `typescript-review-*.md`     |
+| Playbook                     | Purpose                                                                                 | Report output                 |
+| ---------------------------- | --------------------------------------------------------------------------------------- | ----------------------------- |
+| `frontend-architect`         | Page splitting, component architecture, state flow, directory planning, large refactors | `architecture-proposal-*.md`  |
+| `performance-optimizer`      | Performance bottlenecks (bundle, render, network); quantified optimization plan         | `performance-review-*.md`     |
+| `ui-checker`                 | UI defects, design fidelity vs design specs                                             | `ui-fidelity-review-*.md`     |
+| `figma-implementer`          | High-fidelity UI from Figma / Sketch / MasterGo / Pixso / 墨刀 / 摹客                   | `design-implementation-*.md`  |
+| `design-token-mapper`        | Map design variables to project Design Tokens                                           | `token-mapping-*.md`          |
+| `frontend-code-reviewer`     | Frontend code review (React/Vue/Next/Nuxt, a11y, client security)                       | `code-review-*.md`            |
+| `frontend-security-reviewer` | Browser-side security (XSS, secrets, dangerous DOM/API)                                 | `security-review-*.md`        |
+| `frontend-e2e-runner`        | E2E journeys, Playwright/Cypress, flaky handling                                        | `e2e-summary-*.md` (optional) |
+| `typescript-reviewer`        | TS/JS types, async, security; run typecheck first                                       | `typescript-review-*.md`      |
 
 ### Typed hooks (plugin)
 

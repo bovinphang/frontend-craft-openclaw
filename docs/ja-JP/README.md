@@ -15,7 +15,7 @@
 
 このリポジトリは **OpenClaw ネイティブプラグイン**です（`openclaw.plugin.json` と `src/index.ts`）。フロントエンド向けスキル、`skills/agents/` のプレイブック、任意ツール **`frontend_craft_init_workspace`**、typed hooks（危険な `exec` のブロック、任意の Prettier、ワークスペースのフレームワークヒントなど）を提供します。
 
-**要件:** Node.js ≥ 22、OpenClaw ≥ 2026.3.22。
+**要件:** Node.js ≥ 22、OpenClaw ≥ 2026.4.20。
 
 ## インストール
 
@@ -33,13 +33,22 @@ npm パッケージ名（ClawHub を優先し、なければレジストリ）:
 openclaw plugins install frontend-craft
 ```
 
-ローカルクローンなど:
+ローカルクローンなど（Windows ではこちらを推奨）:
 
 ```bash
-openclaw plugins install /path/to/frontend-craft
+# 先にパッケージ化してからインストール（pnpm symlink の EPERM 回避）:
+npm install
+npm run build
+npm pack
+openclaw plugins install ./frontend-craft-<version>.tgz
+
+# 開発時のリンクインストール:
+openclaw plugins install -l /path/to/frontend-craft
 openclaw gateway restart
 openclaw plugins inspect frontend-craft
 ```
+
+`node_modules` が pnpm 形式の symlink 構成だと、Windows では `EPERM ... symlink ...` が発生する場合があります。
 
 `plugins.allow` と `plugins.entries.frontend-craft` の設定を推奨します。
 

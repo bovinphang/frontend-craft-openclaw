@@ -15,7 +15,7 @@
 
 本倉庫為 **OpenClaw 原生插件**（`openclaw.plugin.json` + `src/index.ts`），提供前端工作流技能、`skills/agents/` 劇本、可選工具 **`frontend_craft_init_workspace`**，以及 typed hooks（`exec` 安全攔截、可選 Prettier、工作區框架提示、可選完成通知等）。
 
-**需求：** Node.js ≥ 22、OpenClaw ≥ 2026.3.22。
+**需求：** Node.js ≥ 22、OpenClaw ≥ 2026.4.20。
 
 ## 安裝
 
@@ -33,13 +33,22 @@ openclaw plugins install clawhub:frontend-craft
 openclaw plugins install frontend-craft
 ```
 
-本機克隆或壓縮包：
+本機克隆或壓縮包（Windows 建議此方式）：
 
 ```bash
-openclaw plugins install /path/to/frontend-craft
+# 先打包再安裝（避免 pnpm symlink 在 Windows 複製 EPERM）：
+npm install
+npm run build
+npm pack
+openclaw plugins install ./frontend-craft-<version>.tgz
+
+# 開發可用連結安裝：
+openclaw plugins install -l /path/to/frontend-craft
 openclaw gateway restart
 openclaw plugins inspect frontend-craft
 ```
+
+若直接安裝本機目錄且 `node_modules` 為 pnpm 符號連結結構，Windows 可能出現 `EPERM ... symlink ...`。
 
 建議在 `openclaw.json` 設定 `plugins.allow` 與 `plugins.entries.frontend-craft`。
 
