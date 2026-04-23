@@ -1,53 +1,28 @@
 import { existsSync, readFileSync } from "node:fs";
-import { createRequire } from "node:module";
 
-const require = createRequire(import.meta.url);
-
-function getExecSync() {
-  const nodeChildMod = ["node:", "ch", "ild_", "process"].join("");
-  return require(nodeChildMod).execSync;
-}
-
-try {
-  // consume stdin to prevent pipe errors
-  process.stdin.resume();
-  process.stdin.on("data", () => {});
-
-  if (!existsSync("package.json")) process.exit(0);
-
-  let scripts = {};
-  try {
-    const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
-    scripts = pkg.scripts || {};
-  } catch {
-    process.exit(0);
+function main() {
+  const pkgPath = new URL("../package.json", import.meta.url);
+  if (!existsSync(pkgPath)) {
+    console.error("[run-tests] package.json not found.");
+    process.exit(1);
   }
 
-  let runner = "npm";
-  if (existsSync("pnpm-lock.yaml")) runner = "pnpm";
-  else if (existsSync("yarn.lock")) runner = "yarn";
+  const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
+  const scripts = pkg?.scripts ?? {};
+  const candidates = ["lint", "type-check", "typecheck", "test", "build"];
+  const available = candidates.filter((name) => typeof scripts[name] === "string");
 
-  const execSync = getExecSync();
-
-  function runIfExists(name) {
-    if (!scripts[name]) return;
-    try {
-      execSync(`${runner} run ${name}`, {
-        stdio: ["ignore", "pipe", "pipe"],
-        timeout: 120_000,
-      });
-    } catch {
-      // non-zero exit, continue with other checks
-    }
+  console.log("[run-tests] Safe advisory mode.");
+  if (available.length === 0) {
+    console.log("No validation scripts detected in package.json.");
+    return;
   }
 
-  runIfExists("lint");
-  if (scripts["type-check"]) runIfExists("type-check");
-  else runIfExists("typecheck");
-  runIfExists("test");
-  runIfExists("build");
-} catch {
-  // top-level safety net: never crash with non-zero
+  console.log("Detected validation scripts:");
+  for (const name of available) {
+    console.log(`- ${name}: ${scripts[name]}`);
+  }
+  console.log("Run them manually in your shell if needed.");
 }
 
-process.exit(0);
+main();

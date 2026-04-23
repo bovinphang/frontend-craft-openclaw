@@ -14,4 +14,3 @@ dist
 *.tar.lz4
 *.tar.zstd
 *.tar.br
-*.tgz

@@ -52,6 +52,8 @@ openclaw plugins inspect frontend-craft
 
 建議在 `openclaw.json` 設定 `plugins.allow` 與 `plugins.entries.frontend-craft`。
 
+> 若 `plugins.allow` 未包含 `frontend-craft`，閘道啟動時可能出現外掛信任提示／安全警告。請先將插件 ID 加入 allowlist，再重啟閘道。
+
 ## 更新
 
 若自 ClawHub / npm 安裝，可用插件 id 更新：

@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Typed hooks via `api.on`: `before_tool_call`, `after_tool_call`, `before_prompt_build`, `agent_end`; optional `gateway_stop` validation when `runValidationOnGatewayStop` is true.
+- Typed hooks via `api.on`: `before_tool_call`, `after_tool_call`, `before_prompt_build`, `agent_end`.
 - Optional tool **`frontend_craft_init_workspace`** (allowlist in OpenClaw) to copy templates into a workspace directory.
 - `package.json` with `openclaw.extensions`, `peerDependencies.openclaw`, and `npm run typecheck`.
 

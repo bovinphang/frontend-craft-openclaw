@@ -59,6 +59,8 @@ openclaw plugins install -l /path/to/frontend-craft
 
 建议在配置中显式允许并启用：
 
+> 若 `plugins.allow` 未包含 `frontend-craft`，网关启动时可能出现插件信任提示 / 安全告警。请先将插件 ID 加入 allowlist，再重启网关。
+
 ```json5
 {
   plugins: {
@@ -221,7 +223,6 @@ frontend-craft/
 | `after_tool_call`     | 对 `write`/`edit` 目标可选运行 Prettier（`formatAfterWrite`，默认开启）                               |
 | `before_prompt_build` | 每个会话一次框架与包管理器提示                                                                        |
 | `agent_end`           | 成功结束时可选系统通知（`notifyOnAgentEnd`，默认开启）                                                |
-| `gateway_stop`        | 可选在网关停止时跑 `lint` / `type-check` / `test` / `build`（`runValidationOnGatewayStop`，默认关闭） |
 
 ### 插件配置项
 
@@ -229,7 +230,6 @@ frontend-craft/
 | ---------------------------- | ------- | ------- | -------------------- |
 | `formatAfterWrite`           | boolean | `true`  | 写后 Prettier        |
 | `notifyOnAgentEnd`           | boolean | `true`  | 运行成功桌面通知     |
-| `runValidationOnGatewayStop` | boolean | `false` | 网关停止时跑校验脚本 |
 
 ---
 

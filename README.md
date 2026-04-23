@@ -63,6 +63,8 @@ If you install directly from a local directory that uses pnpm-style symlinks in 
 
 Enable explicitly (recommended):
 
+> If `plugins.allow` does not include `frontend-craft`, gateway startup may show a plugin trust prompt / security warning. Add the plugin id to the allowlist before restarting the gateway.
+
 ```json5
 {
   plugins: {
@@ -74,7 +76,6 @@ Enable explicitly (recommended):
           // optional — see openclaw.plugin.json configSchema
           // "formatAfterWrite": true,
           // "notifyOnAgentEnd": true,
-          // "runValidationOnGatewayStop": false,
         },
       },
     },
@@ -228,7 +229,6 @@ Markdown under `skills/agents/*.md` corresponds to the **sub-agent** roles in th
 | `after_tool_call`     | Optional Prettier on `write` / `edit` targets (`formatAfterWrite`, default on)                |
 | `before_prompt_build` | One-line framework + package-manager hint per session (from workspace `package.json`)         |
 | `agent_end`           | Optional desktop notification on success (`notifyOnAgentEnd`, default on)                     |
-| `gateway_stop`        | Optional `lint` / `type-check` / `test` / `build` (`runValidationOnGatewayStop`, default off) |
 
 ### Plugin config (`plugins.entries.frontend-craft.config`)
 
@@ -236,7 +236,6 @@ Markdown under `skills/agents/*.md` corresponds to the **sub-agent** roles in th
 | ---------------------------- | ------- | ------- | ------------------------------------------------------------------ |
 | `formatAfterWrite`           | boolean | `true`  | Prettier after write/edit                                          |
 | `notifyOnAgentEnd`           | boolean | `true`  | OS notification when a run succeeds                                |
-| `runValidationOnGatewayStop` | boolean | `false` | Run package scripts on gateway stop (`process.cwd()` at stop time) |
 
 ---
 

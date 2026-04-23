@@ -52,6 +52,8 @@ openclaw plugins inspect frontend-craft
 
 `plugins.allow` 및 `plugins.entries.frontend-craft` 설정을 권장합니다.
 
+> `plugins.allow`에 `frontend-craft`가 없으면 게이트웨이 시작 시 플러그인 신뢰 확인 프롬프트/보안 경고가 나타날 수 있습니다. 게이트웨이를 재시작하기 전에 allowlist에 플러그인 ID를 추가하세요.
+
 ## 업데이트
 
 ClawHub / npm으로 설치한 경우 플러그인 id로 업데이트:

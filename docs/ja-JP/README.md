@@ -52,6 +52,8 @@ openclaw plugins inspect frontend-craft
 
 `plugins.allow` と `plugins.entries.frontend-craft` の設定を推奨します。
 
+> `plugins.allow` に `frontend-craft` が含まれていない場合、ゲートウェイ起動時にプラグインの信頼確認プロンプト／セキュリティ警告が表示されることがあります。再起動前に allowlist へプラグイン ID を追加してください。
+
 ## 更新
 
 ClawHub / npm で入れた場合はプラグイン id で更新:

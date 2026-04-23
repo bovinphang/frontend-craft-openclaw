@@ -4,12 +4,10 @@ import { extractShellCommand, getDangerousExecBlockReason } from "./security.js"
 import { pathFromWriteLikeParams, tryPrettierWrite } from "./format-file.js";
 import { buildFrameworkHint } from "./framework-hint.js";
 import { notifyTaskComplete } from "./notify-complete.js";
-import { runPackageValidation } from "./run-validation.js";
 import { initFrontendCraftWorkspace } from "./init-workspace.js";
 
 type PluginConfig = {
   notifyOnAgentEnd: boolean;
-  runValidationOnGatewayStop: boolean;
   formatAfterWrite: boolean;
 };
 
@@ -17,7 +15,6 @@ function resolveConfig(pluginConfig: Record<string, unknown> | undefined): Plugi
   const c = pluginConfig ?? {};
   return {
     notifyOnAgentEnd: c.notifyOnAgentEnd !== false,
-    runValidationOnGatewayStop: c.runValidationOnGatewayStop === true,
     formatAfterWrite: c.formatAfterWrite !== false,
   };
 }
@@ -74,12 +71,6 @@ export default definePluginEntry({
         const e = event as { success?: boolean };
         if (!e.success) return;
         notifyTaskComplete("OpenClaw", "任务完成");
-      });
-    }
-
-    if (config.runValidationOnGatewayStop) {
-      api.on("gateway_stop", async () => {
-        runPackageValidation(process.cwd());
       });
     }
 

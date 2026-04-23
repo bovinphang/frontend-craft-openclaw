@@ -1,87 +1,87 @@
 {
-    "name": "frontend-craft",
-    "version": "1.2.2",
-    "description": "OpenClaw native plugin: frontend skills, workspace templates, design-to-code MCP hints, and safety hooks for frontend teams.",
-    "type": "module",
-    "license": "MIT",
-    "author": {
-        "name": "Bovin Phang",
-        "email": "pengbaowen@msn.com"
-    },
-    "keywords": [
-        "openclaw",
-        "openclaw-plugin",
-        "frontend",
-        "react",
-        "vue",
-        "figma",
-        "design-to-code"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/bovinphang/frontend-craft-openclaw.git"
-    },
-    "engines": {
-        "node": ">=22"
-    },
-    "main": "./dist/index.js",
-    "exports": {
-        ".": {
-            "default": "./dist/index.js"
-        }
-    },
-    "files": [
-        "dist",
-        "skills",
-        "commands",
-        "templates",
-        "scripts",
-        ".mcp.json",
-        "openclaw.plugin.json",
-        "README.md",
-        "README.zh-CN.md",
-        "LICENSE",
-        "!**/*.ts",
-        "!**/*.tsx",
-        "!**/*.d.ts",
-        "!**/*.map"
-    ],
-    "scripts": {
-        "clean": "node -e \"import('node:fs/promises').then(fs => fs.rm('dist', { recursive: true, force: true }))\"",
-        "typecheck": "tsc --noEmit -p tsconfig.json",
-        "build": "tsc -p tsconfig.json",
-        "check:pack-artifacts": "node scripts/verify-pack-artifacts.mjs",
-        "prepare": "npm run clean && npm run build",
-        "prepack": "npm run clean && npm run typecheck && npm run build && npm run check:pack-artifacts",
-        "prepublishOnly": "npm run clean && npm run typecheck && npm run build"
-    },
-    "openclaw": {
-        "extensions": [
-            "./dist/index.js"
-        ],
-        "compat": {
-            "pluginApi": ">=2026.4.20"
-        },
-        "build": {
-            "openclawVersion": "2026.4.20",
-            "pluginSdkVersion": "2026.4.20"
-        }
-    },
-    "peerDependencies": {
-        "openclaw": ">=2026.4.20"
-    },
-    "dependencies": {
-        "@sinclair/typebox": "^0.34.49"
-    },
-    "optionalDependencies": {
-        "prettier": "^3.5.0"
-    },
-    "devDependencies": {
-        "@types/node": "^22.19.15",
-        "openclaw": "^2026.4.20",
-        "typescript": "^5.7.3"
-    },
-    "publishConfig": {
-        "access": "public"
+  "name": "frontend-craft",
+  "version": "1.2.3",
+  "description": "OpenClaw native plugin: frontend skills, workspace templates, design-to-code MCP hints, and safety hooks for frontend teams.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Bovin Phang",
+    "email": "pengbaowen@msn.com"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "frontend",
+    "react",
+    "vue",
+    "figma",
+    "design-to-code"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bovinphang/frontend-craft-openclaw.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "skills",
+    "commands",
+    "templates",
+    ".mcp.json",
+    "openclaw.plugin.json",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "!**/*.ts",
+    "!**/*.tsx",
+    "!**/*.d.ts",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "clean": "node -e \"import('node:fs/promises').then(fs => fs.rm('dist', { recursive: true, force: true }))\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "node scripts/build.mjs",
+    "check:pack-artifacts": "node scripts/verify-pack-artifacts.mjs",
+    "prepare": "npm run clean && npm run build",
+    "prepack": "npm run clean && npm run typecheck && npm run build && npm run check:pack-artifacts",
+    "prepublishOnly": "npm run clean && npm run typecheck && npm run build"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.4.20"
+    },
+    "build": {
+      "openclawVersion": "2026.4.20",
+      "pluginSdkVersion": "2026.4.20"
+    }
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.4.20"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.49"
+  },
+  "optionalDependencies": {
+    "prettier": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "esbuild": "^0.28.0",
+    "openclaw": "^2026.4.20",
+    "typescript": "^5.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
